@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حسنين | مصمم منشورات سوشيال ميديا</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         :root {
-            --bg: #111111; /* أسود أنعم قليلاً لفخامة أكثر */
+            --bg: #111111; /* أسود فخم */
             --text: #ffffff;
             --grey: #aaaaaa;
-            --soft-grey: #222222;
+            --soft-grey: #1a1a1a;
+            --transition-smooth: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -22,7 +23,7 @@
             font-family: 'Cairo', sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.8;
             text-align: center;
         }
 
@@ -44,75 +45,97 @@
         }
 
         .logo-container {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
             border: 3px solid #fff;
             overflow: hidden;
-            margin-bottom: 30px;
-            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
         }
 
         .logo-container img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* ليظهر الشعار كاملاً */
+            object-fit: contain;
         }
 
         /* الجملة التسويقية (Hook) */
         .hook-text {
-            font-size: clamp(1.4rem, 3vw, 2.3rem);
+            font-size: clamp(1.5rem, 3.5vw, 2.5rem);
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #fff;
+            letter-spacing: -1px;
         }
 
         /* النبذة الشخصية */
         .bio-section {
-            max-width: 650px;
-            margin-bottom: 40px;
+            max-width: 700px;
+            margin-bottom: 50px;
         }
 
         .bio-section h1 {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            font-weight: 400;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: 300; /* وزن خفيف للاسم */
         }
 
         .bio-section h1 span {
             font-weight: 700;
-            border-bottom: 2px solid #fff;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* حركة الخط الديناميكية تحت الاسم */
+        .bio-section h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #fff;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 1s ease 0.5s; /* تظهر بعد نصف ثانية */
+        }
+
+        .bio-section h1 span.active::after {
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
         .bio-section p {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--grey);
-            font-weight: 200;
+            font-weight: 400; /* زيادة سمك الجملة الأخيرة */
         }
 
         /* شبكة الأعمال (The Portfolio) */
         .portfolio {
-            padding: 100px 5%;
+            padding: 120px 5%;
             background: var(--soft-grey);
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-style: italic;
-            margin-bottom: 60px;
-            opacity: 0.8;
+            margin-bottom: 80px;
+            opacity: 0.9;
         }
 
         .work-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 60px;
         }
 
         .work-item {
             text-decoration: none;
             color: inherit;
+            transition: var(--transition-smooth);
         }
 
         .img-box {
@@ -120,8 +143,10 @@
             aspect-ratio: 4/5; /* متناسب مع قياسات البوستات العمودية */
             overflow: hidden;
             background: #111;
-            margin-bottom: 20px;
-            border-radius: 8px;
+            margin-bottom: 25px;
+            border-radius: 15px; /* حواف منحنية ناعمة وعصرية */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3); /* ظل داخلي خفيف لعمق أكثر */
+            transition: var(--transition-smooth);
         }
 
         .work-item img {
@@ -129,7 +154,15 @@
             height: 100%;
             object-fit: cover;
             transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
-            filter: grayscale(0.5); /* تأثير رمادي هادئ */
+            filter: grayscale(0.6); /* تأثير رمادي هادئ */
+        }
+
+        .work-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .work-item:hover .img-box {
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
         }
 
         .work-item:hover img {
@@ -137,21 +170,24 @@
             filter: grayscale(0); /* الألوان الطبيعية تظهر بوضوح */
         }
 
-        .work-item h3 { font-size: 1.5rem; font-weight: 400; }
+        .work-item h3 {
+            font-size: 1.7rem;
+            font-weight: 300; /* وزن خفيف لعناوين الأعمال */
+        }
 
         /* قسم التواصل - Bold & Full Width */
         .contact-footer {
-            padding: 150px 5%;
+            padding: 180px 5%;
             text-align: center;
             background: #000;
             color: #fff;
-            border-top: 1px solid #111;
+            border-top: 1px solid #222;
         }
 
         .contact-footer h2 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 6vw, 4rem);
-            margin-bottom: 40px;
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            margin-bottom: 50px;
             font-style: italic;
             font-weight: 700;
         }
@@ -164,34 +200,38 @@
         }
 
         .btn {
-            padding: 15px 35px;
+            padding: 18px 40px;
             border: 1px solid #fff;
             color: #fff;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 1.1rem;
             transition: 0.3s;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            border-radius: 5px;
+            font-weight: 300;
         }
 
         .btn:hover {
             background: #fff;
             color: #000;
+            transform: translateY(-3px);
         }
 
         /* الموبايل */
         @media (max-width: 768px) {
             .hero { padding: 0 5%; height: auto; padding: 100px 5%;}
-            .work-grid { grid-template-columns: 1fr; }
-            .btn { width: 220px; justify-content: center;}
+            .bio-section h1 { font-size: 1.8rem; }
+            .work-grid { grid-template-columns: 1fr; gap: 40px;}
+            .btn { width: 250px; justify-content: center;}
         }
     </style>
 </head>
 <body>
 
     <div class="loader" id="loader">
-        <h2 style="font-family:'Playfair Display'; font-style:italic; font-size: 2rem;">HASANAIN...</h2>
+        <h2 style="font-family:'Playfair Display'; font-style:italic; font-size: 2.5rem;">HASANAIN...</h2>
     </div>
 
     <section class="hero">
@@ -202,7 +242,7 @@
         <div class="hook-text">“ماكو تفاعل على منشوراتك؟ عندي الحل”</div>
 
         <div class="bio-section">
-            <h1>أنا <span>حسنين</span>، مصمم منشورات سوشيال ميديا</h1>
+            <h1>أنا <span id="hasanain-name">حسنين</span>، مصمم منشورات سوشيال ميديا</h1>
             <p>أحول أفكارك إلى تصاميم تلفت الانتباه وتخلي مشروعك يبرز بين المنافسين.</p>
         </div>
     </section>
@@ -242,16 +282,20 @@
                 <i class="fab fa-telegram"></i> بوت التواصل
             </a>
         </div>
-        <p style="margin-top: 50px; opacity: 0.3; font-size: 0.8rem;">© 2026 HASANAIN. All Rights Reserved.</p>
+        <p style="margin-top: 60px; opacity: 0.3; font-size: 0.9rem;">© 2026 HASANAIN. All Rights Reserved.</p>
     </section>
 
     <script>
-        // اخفاء اللودر بعد ثانية
+        // اخفاء اللودر بعد ثانية وتفعيل حركة الخط تحت الاسم
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
             setTimeout(() => {
                 loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 1000);
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                    // تفعيل حركة الخط تحت الاسم
+                    document.getElementById('hasanain-name').classList.add('active');
+                }, 1000);
             }, 1000);
         });
     </script>
