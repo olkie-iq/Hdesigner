@@ -3,339 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H-Designer | Visual Portfolio</title>
+    <title>حسنين | مصمم منشورات سوشيال ميديا</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;400;700&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* التعريفات الأساسية */
         :root {
-            --black: #000000;
-            --white: #ffffff;
-            --grey-light: #f4f4f4;
-            --grey-dark: #333333;
-            --transition-smooth: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --bg: #111111; /* أسود أنعم قليلاً لفخامة أكثر */
+            --text: #ffffff;
+            --grey: #aaaaaa;
+            --soft-grey: #222222;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Noto Sans Arabic', sans-serif;
-            background-color: var(--white);
-            color: var(--black);
-            line-height: 1.8;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            text-align: center;
         }
 
-        /* تنسيقات العناوين */
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            letter-spacing: -1px;
+        /* شاشة التحميل (Loader Effect) */
+        .loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex; justify-content: center;
+            align-items: center; transition: 1s ease;
         }
 
-        /* قسم التعريف (Hero) - شاشة كاملة */
+        /* القسم الأول - الهيرو (Hero Section) */
         .hero {
             height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
             padding: 0 10%;
-            position: relative;
-            background: 
-                linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
-                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAwMDAiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
-            /* خلفية نمطية خفيفة جداً */
         }
 
-        .hero h1 {
-            font-size: 5rem; /* حجم ضخم */
-            line-height: 1;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .hero h1 span {
-            font-weight: 400;
-            font-style: italic;
-            text-transform: none;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            font-weight: 300;
-            color: var(--grey-dark);
-        }
-
-        .scroll-down {
-            position: absolute;
-            bottom: 30px;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            animation: bounce 2s infinite;
-        }
-
-        /* شبكة الأعمال (Portfolio) */
-        .portfolio {
-            padding: 120px 8%;
-            background-color: var(--white);
-        }
-
-        .section-header {
-            margin-bottom: 100px;
-            text-align: center;
-        }
-
-        .section-header h2 {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-
-        .section-header p {
-            font-weight: 300;
-            color: var(--grey-dark);
-            font-size: 1.1rem;
-        }
-
-        /* الشبكة غير المتناظرة */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 40px;
-        }
-
-        .card {
-            position: relative;
+        .logo-container {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 3px solid #fff;
             overflow: hidden;
-            background: var(--grey-light);
-            transition: var(--transition-smooth);
-            cursor: pointer;
+            margin-bottom: 30px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
-        /* تحديد أحجام مختلفة للبطاقات لكسر الرتابة */
-        .card.wide { grid-column: span 4; height: 500px; }
-        .card.tall { grid-column: span 2; grid-row: span 2; height: 1040px; }
-        .card.standard { grid-column: span 2; height: 500px; }
-
-        .card img {
+        .logo-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%) contrast(110%);
-            transition: var(--transition-smooth);
+            object-fit: contain; /* ليظهر الشعار كاملاً */
         }
 
-        /* تأثير التحويم الفخم */
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+        /* الجملة التسويقية (Hook) */
+        .hook-text {
+            font-size: clamp(1.4rem, 3vw, 2.3rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fff;
         }
 
-        .card:hover img {
-            filter: grayscale(0%) contrast(100%);
-            transform: scale(1.03);
+        /* النبذة الشخصية */
+        .bio-section {
+            max-width: 650px;
+            margin-bottom: 40px;
         }
 
-        /* تفاصيل العمل تظهر فوق الصورة */
-        .card-details {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 40px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
-            color: var(--white);
-            opacity: 0;
-            transition: var(--transition-smooth);
-            transform: translateY(20px);
-        }
-
-        .card:hover .card-details {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .card-details h3 {
-            font-size: 1.8rem;
+        .bio-section h1 {
+            font-size: 2rem;
             margin-bottom: 10px;
+            font-weight: 400;
         }
 
-        .card-details p {
-            font-weight: 300;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .bio-section h1 span {
+            font-weight: 700;
+            border-bottom: 2px solid #fff;
+        }
+
+        .bio-section p {
+            font-size: 1.1rem;
+            color: var(--grey);
+            font-weight: 200;
+        }
+
+        /* شبكة الأعمال (The Portfolio) */
+        .portfolio {
+            padding: 100px 5%;
+            background: var(--soft-grey);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-style: italic;
+            margin-bottom: 60px;
             opacity: 0.8;
         }
 
-        /* قسم التواصل (Footer) */
-        .contact {
-            background-color: var(--black);
-            color: var(--white);
-            padding: 100px 8%;
-            text-align: center;
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 50px;
         }
 
-        .contact h2 {
-            font-size: 3.5rem;
+        .work-item {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .img-box {
+            width: 100%;
+            aspect-ratio: 4/5; /* متناسب مع قياسات البوستات العمودية */
+            overflow: hidden;
+            background: #111;
             margin-bottom: 20px;
+            border-radius: 8px;
         }
 
-        .contact-p {
-            font-size: 1.3rem;
-            font-weight: 300;
-            margin-bottom: 60px;
-            color: #ccc;
+        .work-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 1s cubic-bezier(0.19, 1, 0.22, 1);
+            filter: grayscale(0.5); /* تأثير رمادي هادئ */
         }
 
-        .social-links {
+        .work-item:hover img {
+            transform: scale(1.05);
+            filter: grayscale(0); /* الألوان الطبيعية تظهر بوضوح */
+        }
+
+        .work-item h3 { font-size: 1.5rem; font-weight: 400; }
+
+        /* قسم التواصل - Bold & Full Width */
+        .contact-footer {
+            padding: 150px 5%;
+            text-align: center;
+            background: #000;
+            color: #fff;
+            border-top: 1px solid #111;
+        }
+
+        .contact-footer h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 6vw, 4rem);
+            margin-bottom: 40px;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .contact-links {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin-bottom: 80px;
+            gap: 30px;
             flex-wrap: wrap;
         }
 
-        .social-links a {
-            color: var(--white);
+        .btn {
+            padding: 15px 35px;
+            border: 1px solid #fff;
+            color: #fff;
             text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 400;
-            position: relative;
-            padding-bottom: 5px;
+            font-size: 1rem;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* تأثير خط السفلي ناعم عند التحويم */
-        .social-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 0;
-            height: 1px;
-            background-color: var(--white);
-            transition: width 0.4s ease;
+        .btn:hover {
+            background: #fff;
+            color: #000;
         }
 
-        .social-links a:hover::after {
-            width: 100%;
-            left: 0;
-        }
-
-        .footer-bottom {
-            font-size: 0.8rem;
-            opacity: 0.4;
-            border-top: 1px solid #222;
-            padding-top: 30px;
-        }
-
-        /* حركات التحريك */
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
-        }
-
-        /* التجاوب مع الموبايل */
-        @media (max-width: 1024px) {
-            .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
-            .card.wide, .card.tall, .card.standard { grid-column: span 2; height: 350px; }
-            .hero h1 { font-size: 3.5rem; }
-        }
-
+        /* الموبايل */
         @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-            .card.wide, .card.tall, .card.standard { grid-column: span 1; height: 300px; }
-            .hero h1 { font-size: 2.5rem; }
-            .portfolio { padding: 80px 5%; }
-            .contact h2 { font-size: 2.2rem; }
+            .hero { padding: 0 5%; height: auto; padding: 100px 5%;}
+            .work-grid { grid-template-columns: 1fr; }
+            .btn { width: 220px; justify-content: center;}
         }
     </style>
 </head>
 <body>
 
+    <div class="loader" id="loader">
+        <h2 style="font-family:'Playfair Display'; font-style:italic; font-size: 2rem;">HASANAIN...</h2>
+    </div>
+
     <section class="hero">
-        <h1>H-DESIGNER <br> <span>Visualist</span></h1>
-        <p>مصمم متخصص في صياغة الهويات البصرية المتميزة والحلول الرقمية الجريئة. أحول المفاهيم المعقدة إلى تجارب بصرية بسيطة وقوية.</p>
-        <div class="scroll-down">اسحب للأسفل ↓</div>
+        <div class="logo-container">
+            <img src="IMG_20260409_153958_246.jpg" alt="شعار حسنين">
+        </div>
+
+        <div class="hook-text">“ماكو تفاعل على منشوراتك؟ عندي الحل”</div>
+
+        <div class="bio-section">
+            <h1>أنا <span>حسنين</span>، مصمم منشورات سوشيال ميديا</h1>
+            <p>أحول أفكارك إلى تصاميم تلفت الانتباه وتخلي مشروعك يبرز بين المنافسين.</p>
+        </div>
     </section>
 
     <section class="portfolio">
-        <div class="section-header">
-            <h2>أعمال مختارة</h2>
-            <p>نظرة على بعض المشاريع التي أفتخر بإنجازها.</p>
-        </div>
-
-        <div class="grid">
+        <h2 class="section-title">Latest Works</h2>
+        <div class="work-grid">
             
-            <div class="card wide">
-                <img src="work1.jpg" alt="تصميم هوية بصرية">
-                <div class="card-details">
-                    <h3>استوديو مدار</h3>
-                    <p>هوية بصرية كاملة - 2026</p>
-                </div>
+            <div class="work-item">
+                <div class="img-box"><img src="1.jpg" alt="تصميم هوية بصرية"></div>
+                <h3>هوية بصرية (فور يو)</h3>
             </div>
 
-            <div class="card standard">
-                <img src="work2.jpg" alt="تصميم غلاف كتاب">
-                <div class="card-details">
-                    <h3>فلسفة النور</h3>
-                    <p>تصميم غلاف فني - 2025</p>
-                </div>
+            <div class="work-item">
+                <div class="img-box"><img src="2.jpg" alt="تصميم إعلان عصير"></div>
+                <h3>تصميم إعلان (ميد)</h3>
             </div>
 
-            <div class="card tall">
-                <img src="work3.jpg" alt="تصميم تطبيق">
-                <div class="card-details">
-                    <h3>تطبيق مسار</h3>
-                    <p>تجربة مستخدم (UI/UX) - 2026</p>
-                </div>
-            </div>
-
-            <div class="card standard">
-                <img src="work4.jpg" alt="تصميم شعار">
-                <div class="card-details">
-                    <h3>علامة الرائد</h3>
-                    <p>تصميم شعار حديث - 2025</p>
-                </div>
-            </div>
-
-            <div class="card wide">
-                <img src="work5.jpg" alt="تصميم موقع إلكتروني">
-                <div class="card-details">
-                    <h3>منصة إبداع</h3>
-                    <p>تصميم وتطوير موقع ويب - 2026</p>
-                </div>
+            <div class="work-item">
+                <div class="img-box"><img src="3.jpg" alt="تصميم سوشيال ميديا"></div>
+                <h3>بوستر إعلاني (شيك)</h3>
             </div>
 
         </div>
     </section>
 
-    <footer class="contact">
-        <h2>لنخلق شيئاً عظيماً</h2>
-        <p class="contact-p">هل لديك مشروع قيد التفكير؟ أنا جاهز للنقاش.</p>
-        
-        <div class="social-links">
-            <a href="mailto:hdesigner@example.com">البريد الإلكتروني</a>
-            <a href="https://instagram.com/hdesigner" target="_blank">إنستغرام</a>
-            <a href="https://wa.me/964000000000" target="_blank">واتساب</a>
-            <a href="https://behance.net/hdesigner" target="_blank">بيهانس</a>
+    <section class="contact-footer">
+        <h2>لنصنع فرقاً معاً</h2>
+        <div class="contact-links">
+            <a href="https://www.instagram.com/hasanain9x?igsh=c3g4cGl6MmxiMzc3" target="_blank" class="btn">
+                <i class="fab fa-instagram"></i> إنستغرام
+            </a>
+            <a href="https://www.tiktok.com/@hasan_1934?_r=1&_t=ZS-95OXEdiGOcW" target="_blank" class="btn">
+                <i class="fab fa-tiktok"></i> تيك توك
+            </a>
+            <a href="https://t.me/ru6qbot" target="_blank" class="btn">
+                <i class="fab fa-telegram"></i> بوت التواصل
+            </a>
         </div>
+        <p style="margin-top: 50px; opacity: 0.3; font-size: 0.8rem;">© 2026 HASANAIN. All Rights Reserved.</p>
+    </section>
 
-        <div class="footer-bottom">
-            <p>© 2026 H-DESIGNER. جميع الحقوق محفوظة.</p>
-            <p>بساطة. فخامة. تأثير.</p>
-        </div>
-    </footer>
-
+    <script>
+        // اخفاء اللودر بعد ثانية
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 1000);
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
