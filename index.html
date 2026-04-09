@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>H-Designer | معرض أعمالي</title>
+    <title>H-Designer | Visual Portfolio</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* إعدادات عامة */
+        /* التعريفات الأساسية */
         :root {
-            --primary: #000000;
-            --bg: #ffffff;
-            --accent: #f4f4f4;
+            --black: #000000;
+            --white: #ffffff;
+            --grey-light: #f4f4f4;
+            --grey-dark: #333333;
+            --transition-smooth: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         * {
@@ -23,14 +25,21 @@
 
         body {
             font-family: 'Noto Sans Arabic', sans-serif;
-            background-color: var(--bg);
-            color: var(--primary);
-            line-height: 1.6;
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.8;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* قسم التعريف (Hero Section) */
+        /* تنسيقات العناوين */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        /* قسم التعريف (Hero) - شاشة كاملة */
         .hero {
             height: 100vh;
             display: flex;
@@ -38,110 +47,295 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
-            background: linear-gradient(135deg, #fff 0%, #f9f9f9 100%);
+            padding: 0 10%;
+            position: relative;
+            background: 
+                linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)),
+                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAwMDAiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6bTIwIDIwaDIwdjIwSDIWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4=');
+            /* خلفية نمطية خفيفة جداً */
         }
 
         .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 4rem;
+            font-size: 5rem; /* حجم ضخم */
+            line-height: 1;
             margin-bottom: 20px;
-            letter-spacing: -1px;
             text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            font-weight: 400;
+            font-style: italic;
+            text-transform: none;
         }
 
         .hero p {
             font-size: 1.2rem;
-            max-width: 600px;
-            color: #555;
+            max-width: 700px;
             font-weight: 300;
+            color: var(--grey-dark);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: bounce 2s infinite;
         }
 
         /* شبكة الأعمال (Portfolio) */
         .portfolio {
-            padding: 100px 5%;
+            padding: 120px 8%;
+            background-color: var(--white);
         }
 
-        .section-title {
+        .section-header {
+            margin-bottom: 100px;
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 60px;
-            position: relative;
         }
 
-        .section-title::after {
-            content: '';
-            width: 50px;
-            height: 2px;
-            background: #000;
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
         }
 
+        .section-header p {
+            font-weight: 300;
+            color: var(--grey-dark);
+            font-size: 1.1rem;
+        }
+
+        /* الشبكة غير المتناظرة */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 40px;
         }
 
         .card {
             position: relative;
-            height: 400px;
             overflow: hidden;
-            background: var(--accent);
+            background: var(--grey-light);
+            transition: var(--transition-smooth);
             cursor: pointer;
         }
+
+        /* تحديد أحجام مختلفة للبطاقات لكسر الرتابة */
+        .card.wide { grid-column: span 4; height: 500px; }
+        .card.tall { grid-column: span 2; grid-row: span 2; height: 1040px; }
+        .card.standard { grid-column: span 2; height: 500px; }
 
         .card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: grayscale(100%);
-            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: grayscale(100%) contrast(110%);
+            transition: var(--transition-smooth);
+        }
+
+        /* تأثير التحويم الفخم */
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.1);
         }
 
         .card:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.05);
+            filter: grayscale(0%) contrast(100%);
+            transform: scale(1.03);
         }
 
-        .card-info {
+        /* تفاصيل العمل تظهر فوق الصورة */
+        .card-details {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            padding: 30px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
-            color: #fff;
-            transform: translateY(100%);
-            transition: transform 0.4s ease;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+            color: var(--white);
+            opacity: 0;
+            transition: var(--transition-smooth);
+            transform: translateY(20px);
         }
 
-        .card:hover .card-info {
+        .card:hover .card-details {
+            opacity: 1;
             transform: translateY(0);
+        }
+
+        .card-details h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .card-details p {
+            font-weight: 300;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
         }
 
         /* قسم التواصل (Footer) */
         .contact {
-            background: var(--primary);
-            color: #fff;
-            padding: 80px 5%;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 100px 8%;
             text-align: center;
         }
 
         .contact h2 {
-            font-size: 2.5rem;
-            margin-bottom: 30px;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            margin-bottom: 60px;
+            color: #ccc;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 40px;
+            gap: 40px;
+            margin-bottom: 80px;
+            flex-wrap: wrap;
         }
 
         .social-links a {
-            color: #fff;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 400;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        /* تأثير خط السفلي ناعم عند التحويم */
+        .social-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--white);
+            transition: width 0.4s ease;
+        }
+
+        .social-links a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .footer-bottom {
+            font-size: 0.8rem;
+            opacity: 0.4;
+            border-top: 1px solid #222;
+            padding-top: 30px;
+        }
+
+        /* حركات التحريك */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* التجاوب مع الموبايل */
+        @media (max-width: 1024px) {
+            .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+            .card.wide, .card.tall, .card.standard { grid-column: span 2; height: 350px; }
+            .hero h1 { font-size: 3.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .card.wide, .card.tall, .card.standard { grid-column: span 1; height: 300px; }
+            .hero h1 { font-size: 2.5rem; }
+            .portfolio { padding: 80px 5%; }
+            .contact h2 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>H-DESIGNER <br> <span>Visualist</span></h1>
+        <p>مصمم متخصص في صياغة الهويات البصرية المتميزة والحلول الرقمية الجريئة. أحول المفاهيم المعقدة إلى تجارب بصرية بسيطة وقوية.</p>
+        <div class="scroll-down">اسحب للأسفل ↓</div>
+    </section>
+
+    <section class="portfolio">
+        <div class="section-header">
+            <h2>أعمال مختارة</h2>
+            <p>نظرة على بعض المشاريع التي أفتخر بإنجازها.</p>
+        </div>
+
+        <div class="grid">
+            
+            <div class="card wide">
+                <img src="work1.jpg" alt="تصميم هوية بصرية">
+                <div class="card-details">
+                    <h3>استوديو مدار</h3>
+                    <p>هوية بصرية كاملة - 2026</p>
+                </div>
+            </div>
+
+            <div class="card standard">
+                <img src="work2.jpg" alt="تصميم غلاف كتاب">
+                <div class="card-details">
+                    <h3>فلسفة النور</h3>
+                    <p>تصميم غلاف فني - 2025</p>
+                </div>
+            </div>
+
+            <div class="card tall">
+                <img src="work3.jpg" alt="تصميم تطبيق">
+                <div class="card-details">
+                    <h3>تطبيق مسار</h3>
+                    <p>تجربة مستخدم (UI/UX) - 2026</p>
+                </div>
+            </div>
+
+            <div class="card standard">
+                <img src="work4.jpg" alt="تصميم شعار">
+                <div class="card-details">
+                    <h3>علامة الرائد</h3>
+                    <p>تصميم شعار حديث - 2025</p>
+                </div>
+            </div>
+
+            <div class="card wide">
+                <img src="work5.jpg" alt="تصميم موقع إلكتروني">
+                <div class="card-details">
+                    <h3>منصة إبداع</h3>
+                    <p>تصميم وتطوير موقع ويب - 2026</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="contact">
+        <h2>لنخلق شيئاً عظيماً</h2>
+        <p class="contact-p">هل لديك مشروع قيد التفكير؟ أنا جاهز للنقاش.</p>
+        
+        <div class="social-links">
+            <a href="mailto:hdesigner@example.com">البريد الإلكتروني</a>
+            <a href="https://instagram.com/hdesigner" target="_blank">إنستغرام</a>
+            <a href="https://wa.me/964000000000" target="_blank">واتساب</a>
+            <a href="https://behance.net/hdesigner" target="_blank">بيهانس</a>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 H-DESIGNER. جميع الحقوق محفوظة.</p>
+            <p>بساطة. فخامة. تأثير.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
